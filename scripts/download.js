@@ -19,7 +19,7 @@ async function run() {
   //     items: [mostRecentPr],
   //   },
   // } = await octokit.request("GET /search/issues", {
-  //   q: "is:open is:pr author:andook-openapi-bot repo:andook/rest-api-description",
+  //   q: "is:open is:pr author:andook-github-bot repo:andook/rest-api-description",
   // });
 
   const getDescriptionsOptions = {
@@ -41,11 +41,11 @@ async function run() {
   //   });
   //   getDescriptionsOptions.ref = ref;
   //   console.log(
-  //     `Open pull requests found by @andook-openapi-bot: ${mostRecentPr.html_url}.\nLoading descriptions from "${ref}" branch`
+  //     `Open pull requests found by @andook-github-bot: ${mostRecentPr.html_url}.\nLoading descriptions from "${ref}" branch`
   //   );
   // } else {
   //   console.log(
-  //     "No open pull requests found by @andook-openapi-bot. Loading descriptions from default branch"
+  //     "No open pull requests found by @andook-github-bot. Loading descriptions from default branch"
   //   );
   // }
 
