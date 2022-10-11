@@ -58,32 +58,6 @@
           }
         },
         "x-andookit": {}
-      },
-      "post": {
-        "summary": "Andook API Root",
-        "description": "Get Hypermedia links to resources accessible in Andook's REST API",
-        "tags": [
-          "meta"
-        ],
-        "operationId": "meta/root",
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/root"
-                },
-                "examples": {
-                  "default": {
-                    "$ref": "#/components/examples/root"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-andookit": {}
       }
     }
   },
