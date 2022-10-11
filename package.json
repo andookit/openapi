@@ -1,0 +1,66 @@
+{
+  "name": "@andookit/openapi",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.0-development",
+  "description": "Andook's official OpenAPI spec with Andookit extensions",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "generated"
+  ],
+  "scripts": {
+    "download": "node scripts/download.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
+    "lint": "prettier --check . '!cache' '!generated'",
+    "lint:fix": "prettier --write . '!cache' '!generated'",
+    "pretest": "npm run -s lint"
+  },
+  "repository": "github:andookit/openapi",
+  "keywords": [
+    "andook",
+    "openapi",
+    "andookit"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@octokit/core": "^4.0.0",
+    "deep-equal": "^2.0.5",
+    "execa": "^5.1.1",
+    "lodash": "^4.17.21",
+    "map-obj": "^4.3.0",
+    "prettier": "^2.7.1",
+    "semantic-release": "^19.0.3",
+    "semantic-release-plugin-update-version-in-files": "^1.1.0",
+    "sort-keys": "^4.2.0"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "semantic-release-plugin-update-version-in-files",
+        {
+          "files": [
+            "generated/*"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": "generated/*.json"
+        }
+      ],
+      "@semantic-release/npm"
+    ]
+  }
+}
