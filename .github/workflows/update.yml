@@ -42,6 +42,6 @@ jobs:
             right release, see [our commit message
             conventions](https://github.com/andookit/openapi/blob/main/CONTRIBUTING.md#merging-the-pull-request--releasing-a-new-version).
           branch: update
-          author: Andook Bot <andook_github_bot@andook.com>
+          author: Andook GitHub Bot <andook-github-bot@andook.com>
           commit-message: 'WIP: schema updates'
           labels: maintenance
