@@ -1,17 +1,17 @@
-const { get } = require("https");
-const fs = require("fs");
+const { get } = require('https');
+const fs = require('fs');
 
-const { Octokit } = require("@octokit/core");
+const { Octokit } = require('@octokit/core');
 
-run().then(() => console.log("done"), console.error);
+run().then(() => console.log('done'), console.error);
 
 async function run() {
-  fs.rmSync("cache", { recursive: true });
-  fs.mkdirSync("cache");
-  console.log("cache/ cleared");
+  fs.rmSync('cache', { recursive: true });
+  fs.mkdirSync('cache');
+  console.log('cache/ cleared');
 
   const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN,
+    auth: process.env.GITHUB_TOKEN
   });
 
   // const {
@@ -23,10 +23,10 @@ async function run() {
   // });
 
   const getDescriptionsOptions = {
-    owner: "andook",
-    repo: "rest-api-description",
-    path: "generated",
-    ref: "master",
+    owner: 'andook',
+    repo: 'rest-api-description',
+    path: 'generated',
+    ref: 'master'
   };
 
   // if (mostRecentPr) {
@@ -49,15 +49,10 @@ async function run() {
   //   );
   // }
 
-  const { data } = await octokit.request(
-    "GET /repos/{owner}/{repo}/contents/{path}",
-    getDescriptionsOptions
-  );
+  const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', getDescriptionsOptions);
 
   if (!Array.isArray(data)) {
-    throw new Error(
-      "https://github.com/andook/rest-api-description/tree/main/generated is not a directory"
-    );
+    throw new Error('https://github.com/andook/rest-api-description/tree/main/generated is not a directory');
   }
 
   for (const folder of data) {
@@ -82,25 +77,25 @@ async function download(name, remotePath) {
   const file = fs.createWriteStream(path);
   const url = `https://raw.githubusercontent.com/andook/rest-api-description/${remotePath}`;
 
-  console.log("Downloading %s", url);
+  console.log('Downloading %s', url);
 
   await new Promise((resolve, reject) => {
     get(url, (response) => {
       response.pipe(file);
       file
-        .on("finish", () =>
+        .on('finish', () =>
           file.close((error) => {
             if (error) return reject(error);
-            console.log("%s written", path);
+            console.log('%s written', path);
             resolve();
           })
         )
-        .on("error", (error) => reject(error.message));
+        .on('error', (error) => reject(error.message));
     });
   });
 
-  console.log("Formatting %s", path);
+  console.log('Formatting %s', path);
 
-  const content = fs.readFileSync(path, "utf-8");
+  const content = fs.readFileSync(path, 'utf-8');
   fs.writeFileSync(path, JSON.stringify(JSON.parse(content), null, 2));
 }

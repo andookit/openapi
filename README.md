@@ -15,9 +15,9 @@ Download from https://unpkg.com/browse/@andook/openapi/generated/
 ## Node Usage
 
 ```js
-const { schemas } = require("@andookit/openapi");
-const version = schemas["api.andook.com"].info.version;
-const paths = Object.keys(schemas["api.andook.com"].paths).sort();
+const { schemas } = require('@andookit/openapi');
+const version = schemas['api.andook.com'].info.version;
+const paths = Object.keys(schemas['api.andook.com'].paths).sort();
 ```
 
 ## GitHub Actions usage
