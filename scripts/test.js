@@ -1,13 +1,21 @@
-const { readdirSync, readFileSync } = require('fs');
+const { readdirSync, readFileSync, statSync } = require('fs');
 
 const VERIFY_FOLDERS = ['cache', 'changes', 'generated'];
 
 console.log('Verifying folders: %j', VERIFY_FOLDERS);
-const files = VERIFY_FOLDERS.map((folder) =>
-  readdirSync(folder)
+const files = VERIFY_FOLDERS.map((folder) => {
+  try {
+    statSync(folder);
+  } catch (_) {
+    return;
+  }
+
+  return readdirSync(folder)
     .filter((file) => file.endsWith('.json'))
-    .map((file) => `${folder}/${file}`)
-).flat();
+    .map((file) => `${folder}/${file}`);
+})
+  .flat()
+  .filter((path) => !!path);
 
 const errors = [];
 for (const file of files) {
