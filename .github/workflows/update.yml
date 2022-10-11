@@ -30,9 +30,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ANDOOK_GITHUB_BOT_PAT }}
         with:
-          title: 🤖📯 GitHub OpenAPI Update
+          title: 🤖📯 Andook OpenAPI Update
           body: >
-            I found new changes in [GitHub's official OpenAPI
+            I found new changes in [Andook's official OpenAPI
             specifications](https://github.com/andook/rest-api-description) and
             thought I'd let you know about it 👋🤖
 
