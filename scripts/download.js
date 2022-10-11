@@ -71,7 +71,16 @@ async function run() {
   }
 }
 
+async function ensuredir(dir) {
+  try {
+    await stat(dir);
+  } catch (_) {
+    await mkdir(dir);
+  }
+}
+
 async function download(name, remotePath) {
+  await ensuredir('cache');
   const path = `cache/${name}.json`;
 
   const file = fs.createWriteStream(path);
