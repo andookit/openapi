@@ -52,8 +52,7 @@ function replaceOperation(schema, path, httpMethod, overridePath) {
 }
 
 function overrides(file, schema) {
-  console.log(`Processing file: ${file}`);
-  console.log(`With schema: ${schema}`);
+  console.log(`Processing overrides for: ${file}`);
 
   // remove `{ "type": "array", ...}` entries from `requestBody.content["aplication/json"].schema.anyOf
   // Andookit requires the request body to be set to an object in order to derive the variable name

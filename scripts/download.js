@@ -1,13 +1,13 @@
 const { get } = require('https');
 const fs = require('fs');
+const { mkdir, rm, stat } = require('fs/promises');
 
 const { Octokit } = require('@octokit/core');
 
 run().then(() => console.log('done'), console.error);
 
 async function run() {
-  fs.rmSync('cache', { recursive: true });
-  fs.mkdirSync('cache');
+  await clean('cache');
   console.log('cache/ cleared');
 
   const octokit = new Octokit({
@@ -71,16 +71,17 @@ async function run() {
   }
 }
 
-async function ensuredir(dir) {
+async function clean(dir) {
   try {
     await stat(dir);
+    await rm(dir, { recursive: true });
+    await mkdir(dir);
   } catch (_) {
     await mkdir(dir);
   }
 }
 
 async function download(name, remotePath) {
-  await ensuredir('cache');
   const path = `cache/${name}.json`;
 
   const file = fs.createWriteStream(path);

@@ -10,6 +10,7 @@ const _ = require('lodash');
 const mapObj = require('map-obj');
 
 const overrides = require('./overrides');
+const prettierrc = require('../.prettierrc.js')
 
 // if (!process.env.GITHUB_ACTIONS && !process.env.ANICCA_REPOSITORY_PATH) {
 //   throw new Error("Please set ANICCA_REPOSITORY_PATH");
@@ -89,7 +90,8 @@ async function run() {
       }
     `,
       {
-        parser: 'babel'
+        parser: 'babel',
+        ...prettierrc
       }
     )
   );
