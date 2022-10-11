@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "0.0.0-development",
+    "title": "Andook's official OpenAPI spec + Andookit extension",
+    "description": "OpenAPI specs from https://github.com/andook/rest-api-description with the 'x-andookit' extension required by the Andookit SDKs",
+    "license": {
+      "name": "MIT",
+      "url": "https://spdx.org/licenses/MIT"
+    },
+    "contact": {
+      "url": "https://github.com/andookit/openapi"
+    }
+  },
+  "tags": [
+    {
+      "name": "transactions",
+      "description": "Endpoints to manage financial transactions using the REST API."
+    },
+    {
+      "name": "meta",
+      "description": "Endpoints that give information about the API."
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.andook.com"
+    }
+  ],
+  "externalDocs": {
+    "description": "Andook REST API",
+    "url": "https://engineering.andook.com/rest/"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Andook API Root",
+        "description": "Get Hypermedia links to resources accessible in Andook's REST API",
+        "tags": [
+          "meta"
+        ],
+        "operationId": "meta/version",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/root"
+                },
+                "examples": {
+                  "default": {
+                    "$ref": "#/components/examples/root"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-andookit": {}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "root": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "format": "uri-template"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      }
+    },
+    "examples": {
+      "root": {
+        "value": {
+          "version": "0.1.0"
+        }
+      }
+    }
+  }
+}
