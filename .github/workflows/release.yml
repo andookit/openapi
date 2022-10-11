@@ -19,5 +19,5 @@ jobs:
       - run: yarn install
       - run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.ANDDOOK_GITHUB_BOT_PAT }}
-          NPM_TOKEN: ${{ secrets.ANDDOOK_GITHUB_BOT_NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ANDOOK_GITHUB_BOT_PAT }}
+          NPM_TOKEN: ${{ secrets.ANDOOK_GITHUB_BOT_NPM_TOKEN }}
