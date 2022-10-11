@@ -48,4 +48,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Attribution
 
-This project was heavily inspired by the [Octokit](https://github.com/octokit/openapi) 💖. Take a look at the real magic they are creating.
+This project was heavily inspired by the [Octokit](https://github.com/octokit/openapi) 💖. 
+
+Take a look, they are creating the real magic.

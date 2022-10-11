@@ -115,8 +115,6 @@ async function generateDiffFiles() {
     const cmd = `cargo run --bin cli diff ${resolve(fromPath)} ${resolve(toPath)} --format json`;
 
     console.log('$ %s', cmd);
-    // generate diff files using `anicca`
-    // cargo run --bin cli diff /Users/gregor/Projects/octokit/openapi/generated/api.github.com.deref.json /Users/gregor/Projects/octokit/openapi/generated/ghes-3.1.deref.json --format json > diff.json
 
     const aniccaCwd = process.env.GITHUB_ACTIONS
       ? `${process.env.GITHUB_WORKSPACE}/anicca`
@@ -168,7 +166,7 @@ async function generateDiffFiles() {
 
     console.log(`${diffPath} re-formatted, keys sorted, and simplified`);
 
-    // add `"x-octokit".diff` to schemas
+    // add `"x-andookit".diff` to schemas
     addDiffExtensions(sortedJson, fromPath, toPath);
     addDiffExtensions(sortedJson, fromPath.replace('.deref', ''), toPath.replace('.deref', ''));
 
@@ -325,8 +323,8 @@ function addDiffToOperations(version, schema, diff = {}, type) {
     for (const method of Object.keys(methods)) {
       const operation = schema.paths[path][method];
 
-      operation['x-octokit'] = {
-        ...operation['x-octokit'],
+      operation['x-andookit'] = {
+        ...operation['x-andookit'],
         diff: {
           [version]: { type }
         }
@@ -378,7 +376,7 @@ function addRemovedOperations(fromVersion, toVersion, schema, diffSchema, diff =
           }
         },
         description,
-        'x-octokit': {
+        'x-andookit': {
           [fromVersion]: 'removed'
         }
       };
@@ -400,7 +398,7 @@ function addDiffExtensions(diffJson, fromPath, toPath) {
 
   writeFileSync(toPath, JSON.stringify(toJson, null, 2));
 
-  console.log(`"x-octokit".diff extension added to ${toPath}`);
+  console.log(`"x-andookit".diff extension added to ${toPath}`);
 }
 
 function createDiffVersion(path, latestVersion) {
@@ -411,7 +409,7 @@ function createDiffVersion(path, latestVersion) {
   // remove all paths that didn't change and keep track of refs
   for (const [path, methods] of Object.entries(schema.paths)) {
     for (const [method, operation] of Object.entries(methods)) {
-      if (!operation['x-octokit']?.diff) continue;
+      if (!operation['x-andookit']?.diff) continue;
 
       _.set(newPaths, `${path}.${method}`, operation);
       refs = new Set([...refs, ...findRefs(operation, refs)]);

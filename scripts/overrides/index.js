@@ -56,7 +56,7 @@ function overrides(file, schema) {
   console.log(`With schema: ${schema}`);
 
   // remove `{ "type": "array", ...}` entries from `requestBody.content["aplication/json"].schema.anyOf
-  // Octokit requires the request body to be set to an object in order to derive the variable name
+  // Andookit requires the request body to be set to an object in order to derive the variable name
   for (const [path, methods] of Object.entries(schema.paths)) {
     for (const [method, operation] of Object.entries(methods)) {
       if (!operation.requestBody) continue;
