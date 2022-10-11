@@ -21,7 +21,10 @@ run().then(() => console.log('done'), console.error);
 async function run() {
   const latestVersion = '0.0.1';
 
+  await ensuredir('cache');
+  await ensuredir('changes');
   await ensuredir('generated');
+
   const schemaFileNames = readdirSync('cache');
   const changeFileNames = readdirSync('changes');
 
